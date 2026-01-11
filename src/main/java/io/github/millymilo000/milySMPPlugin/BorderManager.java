@@ -5,10 +5,14 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class BorderManager {
+
     final private HashMap<UUID, LocalTime> payingPlayers = new HashMap<UUID, LocalTime>();
     final private HashMap<UUID, Integer> prices = new HashMap<UUID, Integer>();
+    final private MilySMPPlugin plugin;
 
     public BorderManager(MilySMPPlugin plugin) {
+        this.plugin = plugin;
+
         // Start a task that checks every 10 minutes if the people in payingPlayers time is up.
         // TODO: test this
         plugin.getServer().getScheduler().runTaskTimer(plugin, new CheckPayingPlayersRunnable(plugin, payingPlayers), 20, 72000);
@@ -21,15 +25,14 @@ public class BorderManager {
         } else {
             payingPlayers.put(uuid, LocalTime.now().plusHours(hours));
         }
-        // TODO: replace this with a config thingy
-        int increaseAmt = 10;
+        int increaseAmt = plugin.getConfig().getInt("border.cross-price-increase");
 
         // Increase price
         if (prices.containsKey(uuid)) {
             prices.replace(uuid, prices.get(uuid) + increaseAmt * hours);
             return;
         }
-        prices.put(uuid, increaseAmt * hours + 10);
+        prices.put(uuid, increaseAmt * hours + plugin.getConfig().getInt("border.initial-cross-price"));
     }
 
     public boolean checkUser(UUID uuid) {
@@ -40,6 +43,6 @@ public class BorderManager {
         if (prices.containsKey(uuid)) {
             return prices.get(uuid);
         }
-        return 10;
+        return plugin.getConfig().getInt("border.initial-cross-price");
     }
 }

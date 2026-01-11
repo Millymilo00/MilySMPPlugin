@@ -54,7 +54,6 @@ public class PayGuiListener implements Listener {
 
             player.sendMessage(ChatColor.GREEN + "Access granted, you can be out for " + hours + " hour(s)");
             borderManager.addUser(player.getUniqueId(), hours);
-            plugin.getLogger().info(wheatAmt + " " + price);
             if (wheatAmt > price) {
                 int refundAmt = wheatAmt - price;
                 player.sendMessage(ChatColor.DARK_AQUA + "You were refunded " + refundAmt +" wheat for the extra.");

@@ -40,13 +40,14 @@ public class PayBorderCommand implements CommandExecutor {
         }
 
         int price = borderManager.getPrice(player.getUniqueId());
-        // TODO: replace this with a config thingy
-        int increaseAmt = 10;
+        int increaseAmt = plugin.getConfig().getInt("border.cross-price-increase");
         int finalPrice = 0;
-        // Theres probably some kind of
         for (int i = 0; i<hours; i++) {
             finalPrice += price;
             price += increaseAmt;
+        }
+        if (finalPrice > plugin.getConfig().getInt("border.max-price")) {
+            finalPrice = plugin.getConfig().getInt("border.max-price");
         }
 
         Inventory paymentInv = Bukkit.createInventory(player, 54, String.format(ChatColor.BOLD + "Insert %d wheat worth of items", finalPrice));

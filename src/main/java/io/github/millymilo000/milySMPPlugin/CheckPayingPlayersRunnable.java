@@ -1,5 +1,6 @@
 package io.github.millymilo000.milySMPPlugin;
 
+import io.github.millymilo000.milySMPPlugin.utils.BorderTeleportUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -36,13 +37,7 @@ public class CheckPayingPlayersRunnable implements Runnable {
             if (LocalTime.now().isBefore(endTime)) {
                 if (player.isOnline()) { // frickk you intellij its not going to be null unless some kind of other error that should instead be fixed or if mojang deletes their account
                     player.sendMessage(ChatColor.DARK_AQUA +"Your time is up, hope you had a good exploring!");
-                    // If they have a respawnLocation send em there! Otherwise, send them to the world spawn.
-                    // I was thinking maybe they should be sent to the closest spot inside the border to them, but ah, that'd be annoying with y coords and such
-                    if (player.getRespawnLocation() instanceof Location spawnLoc) {
-                        player.teleport(spawnLoc);
-                    } else {
-                        player.teleport(player.getWorld().getSpawnLocation());
-                    }
+                    player.teleport(BorderTeleportUtil.getNearestInsideLoc(player, plugin.getConfig().getIntegerList("border.size")));
                 }
                 payingPlayers.remove(uuid);
                 return;
