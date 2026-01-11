@@ -9,6 +9,7 @@ hey there, this is a Minecraft Plugin for 1.21.11 that adds some of the "Server 
 ## TODO:
 * Disable border in nether and end
 * Teleport players who leave a border using a portal
+* Set max price (with config option)
 * Save payingPlayers and prices hashmap to a JSON file (or similar) 
 * Make values configurable
   * Border size
