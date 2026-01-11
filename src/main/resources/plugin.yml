@@ -1,0 +1,12 @@
+name: MilySMPPlugin
+version: '1.0-SNAPSHOT'
+main: io.github.millymilo000.milySMPPlugin.MilySMPPlugin
+api-version: '1.21'
+description: Mily's SMP modifications for servers
+load: POSTWORLD
+commands:
+  pay:
+    description: "Pay to exit the border"
+    usage: "/pay [number hours]"
+    permission: milysmp.pay
+    permission-message: "you're not allowed to leave the border anymore"
