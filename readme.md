@@ -7,6 +7,7 @@ hey there, this is a Minecraft Plugin for 1.21.11 that adds some of the "Server 
 * Disables bonemeal on wheat
 * Slows wheat growth rate
 ## TODO:
-* Save payingPlayers and prices hashmap to a JSON file (or similar)
+* Add a /msmp command that allows reloading the config, info, and help
+* Maybe add a custom config api that allows comments
 
 I have like barely any java experience so be a little gentle with your critques on my java coding skills :>

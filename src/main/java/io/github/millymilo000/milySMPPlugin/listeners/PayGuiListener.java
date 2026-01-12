@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class PayGuiListener implements Listener {
 
@@ -48,7 +49,10 @@ public class PayGuiListener implements Listener {
 
             if (wheatAmt < price) {
                 player.sendMessage(String.format(ChatColor.DARK_RED +  "You didn't give enough wheat. You paid %d, you needed to pay %d", wheatAmt, price));
-                player.give(contents);
+                // If I don't do a runTaskLater, it wont give the items until the player run the /pay command again to get their items
+                plugin.getServer().getScheduler().runTaskLater(plugin, task -> {
+                    player.give(Arrays.stream(contents).filter(Objects::nonNull).collect(Collectors.toList()));
+                }, 5);
                 return;
             }
 
@@ -57,7 +61,6 @@ public class PayGuiListener implements Listener {
             if (wheatAmt > price) {
                 int refundAmt = wheatAmt - price;
                 player.sendMessage(ChatColor.DARK_AQUA + "You were refunded " + refundAmt +" wheat for the extra.");
-
                 int refHayAmt = refundAmt / 9;
                 int refWheatAmt = refundAmt - refHayAmt * 9;
 
@@ -66,14 +69,21 @@ public class PayGuiListener implements Listener {
                 // you cant set items amount to be 0, so heres this awful solution so we dont do that.
                 if (refHayAmt == 0) {
                     wheat.setAmount(refWheatAmt);
-                    player.give(wheat);
+                    // If I don't do a runTaskLater, it wont give the items until the player run the /pay command again to get their items
+                    plugin.getServer().getScheduler().runTaskLater(plugin, task -> {
+                        player.give(wheat);
+                    }, 5);
                 } else if (refWheatAmt == 0) {
                     hay.setAmount(refHayAmt);
-                    player.give(hay);
+                    plugin.getServer().getScheduler().runTaskLater(plugin, task -> {
+                        player.give(hay);
+                    }, 5);
                 } else {
                     wheat.setAmount(refWheatAmt);
                     hay.setAmount(refHayAmt);
-                    player.give(wheat, hay);
+                    plugin.getServer().getScheduler().runTaskLater(plugin, task -> {
+                        player.give(wheat, hay);
+                    }, 5);
                 }
             }
         }

@@ -7,6 +7,7 @@ import io.github.millymilo000.milySMPPlugin.listeners.WheatControlListener;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public final class MilySMPPlugin extends JavaPlugin {
@@ -31,8 +32,11 @@ public final class MilySMPPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-
-        // Todo: Add saving the bordermanager paying people here and prices
+        try {
+            borderManager.saveData();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void setupConfig(FileConfiguration config) {

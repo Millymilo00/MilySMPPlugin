@@ -34,8 +34,8 @@ public class CheckPayingPlayersRunnable implements Runnable {
 
             // Get rid of the guys who are overdue
             Player player = plugin.getServer().getPlayer(uuid);
-            if (LocalTime.now().isBefore(endTime)) {
-                if (player.isOnline()) { // frickk you intellij its not going to be null unless some kind of other error that should instead be fixed or if mojang deletes their account
+            if (LocalTime.now().isAfter(endTime)) {
+                if (player != null && player.isOnline()) {
                     player.sendMessage(ChatColor.DARK_AQUA +"Your time is up, hope you had a good exploring!");
                     player.teleport(BorderTeleportUtil.getNearestInsideLoc(player, plugin.getConfig().getIntegerList("border.size")));
                 }
@@ -43,7 +43,7 @@ public class CheckPayingPlayersRunnable implements Runnable {
                 return;
             }
             // Remind the guys who are have 10 minutes til they gotta go
-            if (LocalTime.now().minusMinutes(10).isBefore(endTime) && player.isOnline()) {
+            if (LocalTime.now().plusMinutes(10).isAfter(endTime) && player != null && player.isOnline()) {
                 TextComponent warning = Component.text("You have 10 minutes before you won't be able to go outside the border anymore.")
                         .color(NamedTextColor.YELLOW)
                         .appendNewline()
