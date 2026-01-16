@@ -6,6 +6,7 @@ hey there, this is a Minecraft Plugin for 1.21.11 that adds some of the "Server 
   * If the time runs out, you are sent to the closest location inside the border, and are warned 10 minutes before it happens.
 * Disables bonemeal on wheat
 * Slows wheat growth rate
+* (Default: Enabled, Requires Protection Stones) disables protection stones for 10 minutes when the owner or trusted people to stones die 
 ## TODO:
 * Add a /msmp command that allows reloading the config, info, and help
 * Maybe add a custom config api that allows comments

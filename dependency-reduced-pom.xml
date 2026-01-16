@@ -4,7 +4,7 @@
   <groupId>io.github.millymilo000</groupId>
   <artifactId>milysmpplugin</artifactId>
   <name>milysmpplugin</name>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1</version>
   <build>
     <defaultGoal>clean package</defaultGoal>
     <resources>
@@ -41,12 +41,32 @@
       <id>papermc-repo</id>
       <url>https://repo.papermc.io/repository/maven-public/</url>
     </repository>
+    <repository>
+      <id>sk89q-repo</id>
+      <url>https://maven.enginehub.org/repo/</url>
+    </repository>
+    <repository>
+      <id>central-repo</id>
+      <url>https://repo1.maven.org/maven2/</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
       <version>1.21.11-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sk89q.worldguard</groupId>
+      <artifactId>worldguard-bukkit</artifactId>
+      <version>7.0.15</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>dev.espi</groupId>
+      <artifactId>protectionstones</artifactId>
+      <version>2.10.2</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

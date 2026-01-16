@@ -2,6 +2,7 @@ package io.github.millymilo000.milySMPPlugin;
 
 import io.github.millymilo000.milySMPPlugin.commands.PayBorderCommand;
 import io.github.millymilo000.milySMPPlugin.listeners.BorderListener;
+import io.github.millymilo000.milySMPPlugin.listeners.DeathListener;
 import io.github.millymilo000.milySMPPlugin.listeners.PayGuiListener;
 import io.github.millymilo000.milySMPPlugin.listeners.WheatControlListener;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -26,6 +27,9 @@ public final class MilySMPPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BorderListener(borderManager, config), this);
         getServer().getPluginManager().registerEvents(new PayGuiListener(this, borderManager), this);
         getServer().getPluginManager().registerEvents(new WheatControlListener(config), this);
+        if (getServer().getPluginManager().getPlugin("ProtectionStones")!=null && config.getBoolean("disable-prot-stones-for-10-ondeath")) {
+            getServer().getPluginManager().registerEvents(new DeathListener(this), this);
+        }
         getCommand("pay").setExecutor(new PayBorderCommand(this, borderManager));
     }
 
@@ -48,5 +52,6 @@ public final class MilySMPPlugin extends JavaPlugin {
 
         config.addDefault("border", borderConfigs);
         config.addDefault("wheat-growth-rate", 0.9);
+        config.addDefault("disable-prot-stones-for-10-ondeath", true);
     }
 }

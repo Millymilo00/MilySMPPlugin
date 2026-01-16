@@ -30,7 +30,7 @@ public class BorderManager {
         }
         // Start a task that checks every 10 minutes if the people in payingPlayers time is up.
         // TODO: test this
-        plugin.getServer().getScheduler().runTaskTimer(plugin, new CheckPayingPlayersRunnable(plugin, payingPlayers), 20, 72000);
+        plugin.getServer().getScheduler().runTaskTimer(plugin, new CheckPayingPlayersRunnable(plugin, payingPlayers), 20, 12000);
     }
 
     public void addUser(UUID uuid, int hours) {
