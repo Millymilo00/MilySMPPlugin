@@ -1,5 +1,5 @@
 name: MilySMPPlugin
-version: '1.1'
+version: '1.1.1'
 main: io.github.millymilo000.milySMPPlugin.MilySMPPlugin
 api-version: '1.21'
 description: Mily's SMP modifications for servers
