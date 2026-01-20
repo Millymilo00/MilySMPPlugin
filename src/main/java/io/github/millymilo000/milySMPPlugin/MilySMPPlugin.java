@@ -26,7 +26,7 @@ public final class MilySMPPlugin extends JavaPlugin {
         this.borderManager = new BorderManager(this);
         getServer().getPluginManager().registerEvents(new BorderListener(borderManager, config), this);
         getServer().getPluginManager().registerEvents(new PayGuiListener(this, borderManager), this);
-        getServer().getPluginManager().registerEvents(new WheatControlListener(config), this);
+        getServer().getPluginManager().registerEvents(new WheatControlListener(), this);
         if (getServer().getPluginManager().getPlugin("ProtectionStones")!=null && config.getBoolean("disable-prot-stones-for-10-ondeath")) {
             getServer().getPluginManager().registerEvents(new DeathListener(this), this);
         }
@@ -51,7 +51,6 @@ public final class MilySMPPlugin extends JavaPlugin {
         borderConfigs.put("max-price", 15552); // A full single chest worth of haybales
 
         config.addDefault("border", borderConfigs);
-        config.addDefault("wheat-growth-rate", 0.9);
         config.addDefault("disable-prot-stones-for-10-ondeath", true);
     }
 }
